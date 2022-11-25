@@ -19,9 +19,21 @@ const pool=createPool({
 
 })
 
+app.get('/login', async (req,res)=>{
+  const nombre=req.query.nombre
+  const contrasena=req.query.contrasena
+  const [result]=await pool.query(`select * from usuario where nombre='${nombre}' and contrasena='${contrasena}'`)
+   
+  if(result[0].nombre==nombre && result[0].contrasena==contrasena){
+      res.send("Usuario correcto")
+  }else {
+      res.send("Usuario incorrecto")
+  }
+});
+
 app.get('/',(req,res)=>{
 
-  res.send("Bienvenido a este servidor..")      
+  res.send(`<h1>hola prras</h1>`)      
 
 })
 
